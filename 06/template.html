@@ -1,0 +1,83 @@
+<html>
+<head>
+	<title>Chat Server</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			ws = new WebSocket("ws://localhost:8080");
+			ws.onmessage = (function(event){
+				var data  = event.data;
+				$('#log ul').append("<li>" + data + "</li>");
+
+			});
+			var input = $('#text input');
+			input.keypress(function(event){
+				if (event.keyCode != 13) return;
+				var msg = input.attr('value');
+				if (msg){
+					ws.send(msg);
+					input.attr('value','').focus();
+					window.scrollBy(0,100000000000000);
+				}
+			});
+
+		});
+	</script>
+	<style>
+		body{
+			margin:0px;
+			padding:0px;
+			background:#ccc;
+			font-family:consolas;
+			font-size:13px;
+		}
+		div#log{
+			height:100%;
+			margin:0px;
+			padding:0px;
+			margin-bottom:-30px;
+			overflow: auto;
+			padding-left:10px;
+			padding-right:10px;
+		}
+		div#log ul{
+			list-style:none;
+			margin:0px;
+			padding:0px;
+		}
+		div#log ul li{
+			margin:0px;
+			margin-bottom:3px;
+			padding: 0px;
+		}
+
+		div#text{
+			height:20px;
+			margin:0px;
+			padding:0px;
+		}
+		div#text input{
+			height:30px;
+			width:100%;
+			line-height:16px;
+			font-size:13px;
+			border:1px solid ;
+		}
+
+	</style>
+</head>
+<body>
+
+<div id="log"><ul>
+	<li>&nbsp;</li>
+</ul></div>
+<div id="text">
+	<input type="text" value="">
+</div>
+
+
+
+
+</body>
+</html>
