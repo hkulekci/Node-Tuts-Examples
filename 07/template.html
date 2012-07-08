@@ -2,13 +2,13 @@
 <head>
 	<title>Chat Server</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script type="text/javascript" src="http://localhost:8080/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="http://{{SERVER}}/socket.io/socket.io.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function(){
 
 			//var socket = new io.Socket('http://localhost:8080', {port:8080});
-			var socket = new io.connect('http://127.0.0.1:8080');
+			var socket = new io.connect('http://{{SERVER}}');
 			//socket.connect(); 
 			socket.on('message', function(message){
 				$('#log ul').append("<li>" + message + "</li>");

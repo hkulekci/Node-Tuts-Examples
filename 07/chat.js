@@ -12,6 +12,7 @@ var http = require('http'),
 	fs = require('fs'),
 	sys = require('sys'),
 	io = require('socket.io'),
+	mu = require('mu2'),
 	clients = [];
 
 var server = http.createServer(function(request, response){
@@ -19,7 +20,12 @@ var server = http.createServer(function(request, response){
 		'Content-Type':'text/html'
 	});
 
-	var rs = fs.createReadStream(__dirname + '/template.html');
+	//var rs = fs.createReadStream(__dirname + '/template.html');
+	var rs = mu.compileAndRender(
+			__dirname + '/template.html', 
+			{SERVER: "192.168.2.138:8080"}
+			);
+	//rs = rs.replace("%SERVER%","192.168.2.138");
 	sys.pump(rs, response);
 
 });
