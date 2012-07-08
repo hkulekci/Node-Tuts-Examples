@@ -1,9 +1,6 @@
 /*
 
-	6 - Chat API
-
-	Download following Javascript File for websocket
-		https://raw.github.com/ncr/node.ws.js/master/ws.js
+	7 - Chat API
 
 */
 
